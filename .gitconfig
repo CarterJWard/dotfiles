@@ -1,0 +1,15 @@
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[user]
+	name = Carter Ward
+	email = 20886719+CarterJWard@users.noreply.github.com
+	signingkey = /Users/carterward/.ssh/id_ed25519
+[core]
+	editor = vim
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
