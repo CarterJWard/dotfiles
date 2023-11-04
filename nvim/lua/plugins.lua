@@ -6,5 +6,8 @@ return require('packer').startup(function(use)
   use {
   'nvim-lualine/lualine.nvim',
   requires = { 'nvim-tree/nvim-web-devicons', opt = true }
-}
+    }
+    use "rebelot/kanagawa.nvim"
+    use "nvim-lua/plenary.nvim"
+    use "ThePrimeagen/harpoon"
   end)
