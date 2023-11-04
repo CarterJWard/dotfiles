@@ -8,7 +8,7 @@
 	email = 20886719+CarterJWard@users.noreply.github.com
 	signingkey = /Users/carterward/.ssh/id_ed25519
 [core]
-	editor = vim
+	editor = nvim
 [commit]
 	gpgsign = true
 [gpg]
