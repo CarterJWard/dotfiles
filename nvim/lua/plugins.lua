@@ -11,4 +11,6 @@ return require('packer').startup(function(use)
     use "nvim-lua/plenary.nvim"
     use "ThePrimeagen/harpoon"
     use { 'nvim-telescope/telescope.nvim', tag = '0.1.4' }
+    use 'mbbill/undotree'
+    use("nvim-treesitter/nvim-treesitter-context")
   end)
