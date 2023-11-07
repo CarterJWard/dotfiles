@@ -1,31 +1,35 @@
-
 return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-  use 'rstacruz/vim-closer'
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use {
-  'nvim-lualine/lualine.nvim',
-  requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    use 'wbthomason/packer.nvim'
+    use 'rstacruz/vim-closer'
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
     use "rebelot/kanagawa.nvim"
     use "nvim-lua/plenary.nvim"
     use "ThePrimeagen/harpoon"
-    use { 'nvim-telescope/telescope.nvim', tag = '0.1.4' }
+    use { 'nvim-telescope/telescope.nvim', tag = '0.1.4', requires = { 'nvim-telescope/telescope-fzf-native.nvim' } }
     use 'mbbill/undotree'
     use("nvim-treesitter/nvim-treesitter-context")
     use {
-  'VonHeikemen/lsp-zero.nvim',
-  branch = 'v3.x',
-  requires = {
-    {'williamboman/mason.nvim'},
-    {'williamboman/mason-lspconfig.nvim'},
-
-    -- LSP Support
-    {'neovim/nvim-lspconfig'},
-    -- Autocompletion
-    {'hrsh7th/nvim-cmp'},
-    {'hrsh7th/cmp-nvim-lsp'},
-    {'L3MON4D3/LuaSnip'},
-  }
+        'hrsh7th/nvim-cmp', requires = {
+        "hrsh7th/cmp-buffer",           -- source for text in buffer
+        "hrsh7th/cmp-path",             -- source for file system paths
+        "L3MON4D3/LuaSnip",             -- snippet engine
+        "saadparwaiz1/cmp_luasnip",     -- for autocompletion
+        "rafamadriz/friendly-snippets", -- useful snippets
+    }
 }
-  end)
+    use {
+        'williamboman/mason.nvim', requires = {
+            'williamboman/mason-lspconfig.nvim'
+        }
+    }
+    use {
+        "neovim/nvim-lspconfig", requires = {
+            "hrsh7th/cmp-nvim-lsp"
+        }
+    }
+    
+end)
