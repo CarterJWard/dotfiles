@@ -85,7 +85,6 @@ require('lazy').setup({
       },
       on_attach = function(bufnr)
         vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
-
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
         vim.keymap.set({ 'n', 'v' }, ']c', function()
@@ -188,6 +187,10 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
    { import = 'custom.plugins' },
+  {
+    'simrat39/rust-tools.nvim',
+    dependencies = {'neovim/nvim-lspconfig'},
+  }
 }, {})
 
 -- [[ Setting options ]]
@@ -473,8 +476,9 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
+  rust_analyzer = {},
+  tsserver = {},
+  eslint = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
@@ -500,15 +504,28 @@ mason_lspconfig.setup {
 }
 
 mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-    }
-  end,
+   function(server_name)
+      if server_name == "rust_analyzer" then
+         require('rust-tools').setup({
+            server = {
+               on_attach = on_attach,
+               capabilities = capabilities,
+               settings = servers[server_name],
+               -- Additional Rust-specific settings
+            },
+            -- Additional rust-tools configuration
+         })
+      else
+         require('lspconfig')[server_name].setup {
+            capabilities = capabilities,
+            on_attach = on_attach,
+            settings = servers[server_name],
+            filetypes = (servers[server_name] or {}).filetypes,
+         }
+      end
+   end,
 }
+
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
