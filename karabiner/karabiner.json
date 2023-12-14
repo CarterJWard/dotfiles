@@ -219,7 +219,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "rewind"
+                            "key_code": "caps_lock"
                         }
                     ]
                 },
