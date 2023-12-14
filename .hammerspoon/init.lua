@@ -15,7 +15,7 @@ end
 
 local modifier = {"ctrl", "alt", "cmd"}
 
-hs.hotkey.bind(modifier, "A", toggleApp("Arc"))
+hs.hotkey.bind(modifier, "J", toggleApp("Arc"))
 hs.hotkey.bind(modifier, "T", toggleApp("Trello"))
 hs.hotkey.bind(modifier, "K", toggleApp("kitty"))
 hs.hotkey.bind(modifier, "S", toggleApp("slack"))
