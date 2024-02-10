@@ -1,4 +1,7 @@
-function toggleApp(appName)
+local currentProfile = "Work"
+local modifier = {"ctrl", "alt", "cmd"}
+
+local function toggleApp(appName)
     return function()
         local appObj = hs.application.get(appName)
         if appObj then
@@ -12,17 +15,45 @@ function toggleApp(appName)
         end
     end
 end
+local profiles = {}
 
-local modifier = {"ctrl", "alt", "cmd"}
+profiles["Work"] = {
+    { key = "E", app = "Spark" },
+    { key = "T", app = "Trello" },
+    { key = "S", app = "slack" },
+    { key = "M", app = "Studio 3T" },
+    { key = "F", app = "Firefox Developer Edition" },
+    { key = "A", app = "Around" }
+}
+profiles["Personal"] = {
+    { key = "E", app="Proton Mail Beta" },
+    { key = "F", app="Safari" }
+}
 
-hs.hotkey.bind(modifier, "J", toggleApp("Arc"))
-hs.hotkey.bind(modifier, "T", toggleApp("Trello"))
+local function switchProfile()
+    return function()
+        -- Unbind existing hotkeys if any
+        currentProfile = currentProfile == "Work" and "Personal" or "Work"
+        hs.alert.show("Profile switched to " .. currentProfile )
+        if currentProfile then
+            for _, app in ipairs(profiles[currentProfile]) do
+                hs.hotkey.disableAll(modifier, app.key)
+            end
+        end
+
+        -- Bind new profile hotkeys
+        for _, app in ipairs(profiles[currentProfile]) do
+            hs.hotkey.bind(modifier, app.key, toggleApp(app.app))
+        end
+
+    end
+end
+
+hs.hotkey.bind(modifier, "P", switchProfile())
+
 hs.hotkey.bind(modifier, "K", toggleApp("kitty"))
-hs.hotkey.bind(modifier, "S", toggleApp("slack"))
 hs.hotkey.bind(modifier, "O", toggleApp("obsidian"))
-hs.hotkey.bind(modifier, "M", toggleApp("Studio 3T"))
-hs.hotkey.bind(modifier, "C", toggleApp("Chrome"))
-hs.hotkey.bind(modifier, "F", toggleApp("Firefox Developer Edition"))
-hs.hotkey.bind(modifier, "E", toggleApp("Spark"))
-hs.hotkey.bind(modifier, "A", toggleApp("Around"))
 hs.hotkey.bind(modifier, "C", toggleApp("Calendar"))
+hs.hotkey.bind(modifier, "N", toggleApp("Notes"))
+hs.hotkey.bind(modifier, "J", toggleApp("Arc"))
+
