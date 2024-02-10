@@ -27,7 +27,8 @@ profiles["Work"] = {
 }
 profiles["Personal"] = {
     { key = "E", app="Proton Mail Beta" },
-    { key = "F", app="Safari" }
+    { key = "F", app="Safari" },
+    { key = "M", app="Music" },
 }
 
 local function switchProfile()
