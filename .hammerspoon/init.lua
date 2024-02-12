@@ -28,7 +28,6 @@ profiles["Work"] = {
 profiles["Personal"] = {
     { key = "E", app="Proton Mail Beta" },
     { key = "F", app="Safari" },
-    { key = "M", app="Music" },
 }
 
 local function switchProfile()
@@ -49,7 +48,6 @@ local function switchProfile()
 
     end
 end
-
 hs.hotkey.bind(modifier, "P", switchProfile())
 
 hs.hotkey.bind(modifier, "K", toggleApp("kitty"))
@@ -57,4 +55,5 @@ hs.hotkey.bind(modifier, "O", toggleApp("obsidian"))
 hs.hotkey.bind(modifier, "C", toggleApp("Calendar"))
 hs.hotkey.bind(modifier, "N", toggleApp("Notes"))
 hs.hotkey.bind(modifier, "J", toggleApp("Arc"))
+hs.hotkey.bind(modifier, "H", toggleApp("Music"))
 
