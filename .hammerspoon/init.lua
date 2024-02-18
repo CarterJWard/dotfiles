@@ -56,4 +56,5 @@ hs.hotkey.bind(modifier, "C", toggleApp("Calendar"))
 hs.hotkey.bind(modifier, "N", toggleApp("Notes"))
 hs.hotkey.bind(modifier, "J", toggleApp("Arc"))
 hs.hotkey.bind(modifier, "H", toggleApp("Music"))
+hs.hotkey.bind(modifier, "G", toggleApp("Messages"))
 
