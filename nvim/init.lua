@@ -34,6 +34,7 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
   'mbbill/undotree',
+  'tpop/vim-surround',
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -196,7 +197,19 @@ require('lazy').setup({
   {
     'simrat39/rust-tools.nvim',
     dependencies = {'neovim/nvim-lspconfig'},
-  }
+  },
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    config = function()
+      require("null-ls").setup({
+          sources = {
+              require("null-ls").builtins.formatting.prettier.with({
+                  -- Configure Prettier options here, if necessary
+                  extra_args = { "--single-quote", "--jsx-single-quote" },
+              }),
+          },
+      })
+  end},
 }, {})
 
 -- [[ Setting options ]]
