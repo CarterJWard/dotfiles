@@ -18,7 +18,7 @@ end
 local profiles = {}
 
 profiles["Work"] = {
-    { key = "E", app = "Spark" },
+    { key = "E", app = "Mail" },
     { key = "T", app = "Trello" },
     { key = "S", app = "slack" },
     { key = "M", app = "Studio 3T" },
