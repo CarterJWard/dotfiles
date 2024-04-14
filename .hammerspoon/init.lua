@@ -23,7 +23,8 @@ profiles["Work"] = {
     { key = "S", app = "slack" },
     { key = "M", app = "Studio 3T" },
     { key = "F", app = "Firefox Developer Edition" },
-    { key = "A", app = "Around" }
+    { key = "A", app = "Around" },
+    { key = "D", app = "Sourcetree" }
 }
 profiles["Personal"] = {
     { key = "E", app="Proton Mail Beta" },
