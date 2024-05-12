@@ -27,7 +27,7 @@ profiles["Work"] = {
     { key = "D", app = "Sourcetree" }
 }
 profiles["Personal"] = {
-    { key = "E", app="Proton Mail Beta" },
+    { key = "E", app="Proton Mail" },
     { key = "F", app="Safari" },
 }
 
