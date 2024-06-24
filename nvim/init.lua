@@ -71,7 +71,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -132,9 +132,9 @@ require('lazy').setup({
         section_separators = '',
       },
       sections = {
-        lualine_a = {'mode'},
-        lualine_b = { 'branch', 'diff', 'diagnostics'},
-        lualine_c = {{'filename', path = 1}}
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diff', 'diagnostics' },
+        lualine_c = { { 'filename', path = 1 } }
       }
     },
   },
@@ -193,23 +193,24 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-   { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
   {
     'simrat39/rust-tools.nvim',
-    dependencies = {'neovim/nvim-lspconfig'},
+    dependencies = { 'neovim/nvim-lspconfig' },
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
     config = function()
       require("null-ls").setup({
-          sources = {
-              require("null-ls").builtins.formatting.prettier.with({
-                  -- Configure Prettier options here, if necessary
-                  extra_args = { "--single-quote", "--jsx-single-quote" },
-              }),
-          },
+        sources = {
+          require("null-ls").builtins.formatting.prettier.with({
+            -- Configure Prettier options here, if necessary
+            extra_args = { "--single-quote", "--jsx-single-quote" },
+          }),
+        },
       })
-  end},
+    end
+  },
 }, {})
 
 -- [[ Setting options ]]
@@ -325,7 +326,7 @@ local function live_grep_git_root()
   local git_root = find_git_root()
   if git_root then
     require('telescope.builtin').live_grep({
-      search_dirs = {git_root},
+      search_dirs = { git_root },
     })
   end
 end
@@ -441,7 +442,7 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction') -- todo use telescope window here
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -496,6 +497,8 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   cssls = {},
+  yamlls = {},
+  jsonls = {},
   rust_analyzer = {},
   tsserver = {
     root_dir = vim.fn.getcwd(),
@@ -526,26 +529,26 @@ mason_lspconfig.setup {
 }
 
 mason_lspconfig.setup_handlers {
-   function(server_name)
-      if server_name == "rust_analyzer" then
-         require('rust-tools').setup({
-            server = {
-               on_attach = on_attach,
-               capabilities = capabilities,
-               settings = servers[server_name],
-               -- Additional Rust-specific settings
-            },
-            -- Additional rust-tools configuration
-         })
-      else
-         require('lspconfig')[server_name].setup {
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = servers[server_name],
-            filetypes = (servers[server_name] or {}).filetypes,
-         }
-      end
-   end,
+  function(server_name)
+    if server_name == "rust_analyzer" then
+      require('rust-tools').setup({
+        server = {
+          on_attach = on_attach,
+          capabilities = capabilities,
+          settings = servers[server_name],
+          -- Additional Rust-specific settings
+        },
+        -- Additional rust-tools configuration
+      })
+    else
+      require('lspconfig')[server_name].setup {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = servers[server_name],
+        filetypes = (servers[server_name] or {}).filetypes,
+      }
+    end
+  end,
 }
 
 
@@ -595,23 +598,23 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
-require('nx').setup{
-    -- Base command to run all other nx commands, some other values may be:
-    -- - `npm nx`
-    -- - `yarn nx`
-    -- - `pnpm nx`
-    nx_cmd_root = 'npx nx',
+require('nx').setup {
+  -- Base command to run all other nx commands, some other values may be:
+  -- - `npm nx`
+  -- - `yarn nx`
+  -- - `pnpm nx`
+  nx_cmd_root = 'npx nx',
 
-    -- Command running capabilities,
-    -- see nx.m.command-runners for more details
-    command_runner = require('nx.command-runners').terminal_cmd(),
-    -- Form rendering capabilities,
-    -- see nx.m.form-renderers for more detials
-    form_renderer = require('nx.form-renderers').telescope(),
+  -- Command running capabilities,
+  -- see nx.m.command-runners for more details
+  command_runner = require('nx.command-runners').terminal_cmd(),
+  -- Form rendering capabilities,
+  -- see nx.m.form-renderers for more detials
+  form_renderer = require('nx.form-renderers').telescope(),
 
-    -- Whether or not to load nx configuration,
-    -- see nx.loading-and-reloading for more details
-    read_init = true,
+  -- Whether or not to load nx configuration,
+  -- see nx.loading-and-reloading for more details
+  read_init = true,
 }
 require("remaps")
 -- The line beneath this is called `modeline`. See `:help modeline`
