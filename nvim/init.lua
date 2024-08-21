@@ -351,7 +351,7 @@ vim.keymap.set('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>gb', require('telescope.builtin').git_branches, { desc = 'Search [G]it [B]ranches' })
+vim.keymap.set('n', '<leader>sb', require('telescope.builtin').git_branches, { desc = 'Search [S]earch [B]ranches' })
 vim.keymap.set('n', '<leader>gm', require('telescope.builtin').git_status, { desc = 'Search [G]it [C]hanges' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
@@ -502,6 +502,7 @@ require('mason-lspconfig').setup()
 local servers = {
   -- clangd = {},
   gopls = {},
+  astro = {},
   -- pyright = {},
   cssls = {},
   yamlls = {},
