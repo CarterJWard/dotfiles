@@ -35,6 +35,8 @@ require('lazy').setup({
   'tpope/vim-sleuth',
   'mbbill/undotree',
   'tpope/vim-surround',
+  --
+  'prettier/vim-prettier',
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -209,19 +211,19 @@ require('lazy').setup({
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
   },
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    config = function()
-      require("null-ls").setup({
-        sources = {
-          require("null-ls").builtins.formatting.prettier.with({
-            -- Configure Prettier options here, if necessary
-            extra_args = { "--single-quote", "--jsx-single-quote" },
-          }),
-        },
-      })
-    end
-  },
+  -- {
+  --   "jose-elias-alvarez/null-ls.nvim",
+  --   config = function()
+  --     require("null-ls").setup({
+  --       sources = {
+  --         require("null-ls").builtins.formatting.prettier.with({
+  --           -- Configure Prettier options here, if necessary
+  --           extra_args = {},
+  --         }),
+  --       },
+  --     })
+  --   end
+  -- },
 }, {})
 
 -- [[ Setting options ]]
